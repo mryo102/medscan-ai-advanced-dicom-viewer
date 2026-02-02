@@ -1,0 +1,5 @@
+{
+  "name": "MedScan AI: Advanced DICOM Viewer",
+  "description": "A professional-grade DICOM viewer with integrated Gemini AI for preliminary scan analysis, patient data extraction, and interactive medical imaging insights.",
+  "requestFramePermissions": []
+}
