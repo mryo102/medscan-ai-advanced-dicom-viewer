@@ -2,13 +2,12 @@
 import { Client } from 'pg';
 import dotenv from 'dotenv';
 import path from 'path';
-import fs from 'fs';
 
 // Force ignore SSL check for this script
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const envPath = path.resolve(process.cwd(), '.env.local');
-const envConfig = dotenv.parse(fs.readFileSync(envPath));
+dotenv.config({ path: envPath });
 
 const projectRef = "uagnfhtuhxiftvvheijw";
 const password = "VUutQMIwKsqUbFk6";
@@ -44,7 +43,7 @@ async function test() {
     } catch (err) {
         console.log("❌ FAILED:", err.message);
     } finally {
-        try { await client.end(); } catch { }
+        try { await client.end(); } catch (e) { /* ignore */ }
     }
 }
 

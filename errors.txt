@@ -1,0 +1,18 @@
+
+C:\Users\0nday\OneDrive\Desktop\medscan-ai_-advanced-dicom-viewer\scripts\create_test_table.ts
+  5:8  error  'fs' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\0nday\OneDrive\Desktop\medscan-ai_-advanced-dicom-viewer\scripts\diag_db.ts
+  5:8  error  'fs' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\0nday\OneDrive\Desktop\medscan-ai_-advanced-dicom-viewer\scripts\multi_test_db.ts
+  5:8  error  'fs' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\0nday\OneDrive\Desktop\medscan-ai_-advanced-dicom-viewer\scripts\verify_db.ts
+  26:19  error  '_' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\0nday\OneDrive\Desktop\medscan-ai_-advanced-dicom-viewer\scripts\verify_tables_api.ts
+  26:23  error  '_' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+??5 problems (5 errors, 0 warnings)
+

@@ -23,7 +23,7 @@ async function verify() {
     const tables = ['scans', 'analyses', 'connection_check'];
 
     for (const table of tables) {
-        const { data, error } = await supabase.from(table).select('count', { count: 'exact', head: true });
+        const { error } = await supabase.from(table).select('count', { count: 'exact', head: true });
         if (error) {
             console.log(`❌ Table '${table}': Not found or error (${error.message})`);
         } else {

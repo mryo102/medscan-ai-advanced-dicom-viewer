@@ -35,8 +35,11 @@ export interface ScanRecord {
 // Global type augmentation for Cornerstone which is loaded via CDN
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     cornerstone: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     cornerstoneWADOImageLoader: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dicomParser: any;
   }
 }

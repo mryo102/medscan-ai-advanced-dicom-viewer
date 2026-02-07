@@ -23,7 +23,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 async function check() {
     // Try to select from the 'scans' table
     console.log("Checking 'scans' table...");
-    const { data, error } = await supabase.from('scans').select('*').limit(1);
+    const { error } = await supabase.from('scans').select('*').limit(1);
 
     if (error) {
         if (error.code === '42P01') { // undefined_table

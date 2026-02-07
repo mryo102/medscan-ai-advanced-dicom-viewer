@@ -2,10 +2,9 @@
 import { Client } from 'pg';
 import dotenv from 'dotenv';
 import path from 'path';
-import fs from 'fs';
 
 const envPath = path.resolve(process.cwd(), '.env.local');
-const envConfig = dotenv.parse(fs.readFileSync(envPath));
+dotenv.config({ path: envPath });
 
 const projectRef = "uagnfhtuhxiftvvheijw";
 const password = "VUutQMIwKsqUbFk6";

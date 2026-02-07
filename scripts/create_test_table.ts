@@ -2,11 +2,10 @@
 import { Client } from 'pg';
 import dotenv from 'dotenv';
 import path from 'path';
-import fs from 'fs';
 
 // Load env
 const envPath = path.resolve(process.cwd(), '.env.local');
-const envConfig = dotenv.parse(fs.readFileSync(envPath));
+dotenv.config({ path: envPath });
 
 // Construct Direct Connection URL
 // Format: postgres://postgres:[PASSWORD]@db.[PROJECT_REF].supabase.co:5432/postgres

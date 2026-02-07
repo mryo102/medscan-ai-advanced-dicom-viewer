@@ -52,10 +52,28 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isReady && viewerRef.current) {
-      window.cornerstone.enable(viewerRef.current);
+    const currentViewer = viewerRef.current;
+    if (isReady && currentViewer) {
+      if (!window.cornerstone.getEnabledElement(currentViewer)) {
+        window.cornerstone.enable(currentViewer);
+      }
+
+      const handleResize = () => {
+        if (currentViewer) {
+          window.cornerstone.resize(currentViewer);
+        }
+      };
+
+      window.addEventListener('resize', handleResize);
       return () => {
-        if (viewerRef.current) window.cornerstone.disable(viewerRef.current);
+        window.removeEventListener('resize', handleResize);
+        if (currentViewer) {
+          try {
+            window.cornerstone.disable(currentViewer);
+          } catch (e) {
+            console.warn("Cornerstone disable error:", e);
+          }
+        }
       };
     }
   }, [isReady]);
@@ -98,6 +116,10 @@ const App: React.FC = () => {
       viewport.voi.windowWidth = image.windowWidth || 400;
       viewport.voi.windowCenter = image.windowCenter || 40;
       window.cornerstone.setViewport(viewerRef.current, viewport);
+
+      // Force Resize and Fit
+      window.cornerstone.resize(viewerRef.current, true);
+      window.cornerstone.fitToWindow(viewerRef.current);
 
     } catch (err) {
       console.error("Error loading image:", err);

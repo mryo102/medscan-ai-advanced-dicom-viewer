@@ -66,6 +66,8 @@ h1, h2, h3, .font-heading {
 /* Viewer specific */
 .viewer-canvas {
   image-rendering: pixelated;
+  min-height: 400px;
+  width: 100%;
 }
 
 /* Animations */

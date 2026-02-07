@@ -1,0 +1,19 @@
+﻿
+C:\Users\0nday\OneDrive\Desktop\medscan-ai_-advanced-dicom-viewer\scripts\create_test_table.ts
+  9:7  error  'envConfig' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\0nday\OneDrive\Desktop\medscan-ai_-advanced-dicom-viewer\scripts\diag_db.ts
+  11:7   error  'envConfig' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  47:43  error  Empty block statement                           no-empty
+
+C:\Users\0nday\OneDrive\Desktop\medscan-ai_-advanced-dicom-viewer\scripts\multi_test_db.ts
+  8:7  error  'envConfig' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\0nday\OneDrive\Desktop\medscan-ai_-advanced-dicom-viewer\scripts\verify_db.ts
+  26:13  error  'data' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\0nday\OneDrive\Desktop\medscan-ai_-advanced-dicom-viewer\scripts\verify_tables_api.ts
+  26:17  error  'data' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+笨・6 problems (6 errors, 0 warnings)
+
