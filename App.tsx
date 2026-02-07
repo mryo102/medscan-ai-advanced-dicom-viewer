@@ -35,8 +35,16 @@ const App: React.FC = () => {
   useEffect(() => {
     // Initialize Cornerstone
     if (window.cornerstone && window.cornerstoneWADOImageLoader) {
+      console.log("Initializing Cornerstone libraries...");
       window.cornerstoneWADOImageLoader.external.cornerstone = window.cornerstone;
       window.cornerstoneWADOImageLoader.external.dicomParser = window.dicomParser;
+
+      // Register the WADO-URI image loader explicitly
+      if (window.cornerstoneWADOImageLoader.wadouri) {
+        window.cornerstoneWADOImageLoader.wadouri.external.cornerstone = window.cornerstone;
+        window.cornerstoneWADOImageLoader.wadouri.external.dicomParser = window.dicomParser;
+        console.log("WADO-URI loader registered.");
+      }
 
       const config = {
         webWorkerPath: 'https://unpkg.com/cornerstone-wado-image-loader@3.1.2/dist/cornerstoneWADOImageLoaderWebWorker.min.js',
@@ -48,6 +56,7 @@ const App: React.FC = () => {
       };
       window.cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
       setIsReady(true);
+      console.log("Cornerstone ready.");
     }
   }, []);
 
@@ -83,11 +92,23 @@ const App: React.FC = () => {
     setAnalysisText('');
     setCurrentScanId(null);
 
-    const imageId = window.cornerstoneWADOImageLoader.fileManager.add(file);
+    const imageId = window.cornerstoneWADOImageLoader.wadouri.fileManager.add(file);
+    console.log("Loading Image ID:", imageId);
 
     try {
+      if (!viewerRef.current) throw new Error("Viewer element not found");
+
+      // Ensure element is enabled
+      if (!window.cornerstone.getEnabledElement(viewerRef.current)) {
+        console.log("Enabling cornerstone element...");
+        window.cornerstone.enable(viewerRef.current);
+      }
+
       const image = await window.cornerstone.loadImage(imageId);
+      console.log("Image loaded successfully:", image);
+
       window.cornerstone.displayImage(viewerRef.current, image);
+      console.log("Image displayed.");
 
       // Extract Metadata
       const ds = image.data;
@@ -117,9 +138,11 @@ const App: React.FC = () => {
       viewport.voi.windowCenter = image.windowCenter || 40;
       window.cornerstone.setViewport(viewerRef.current, viewport);
 
-      // Force Resize and Fit
+      // Force Resize, Update and Fit
+      window.cornerstone.updateImage(viewerRef.current);
       window.cornerstone.resize(viewerRef.current, true);
       window.cornerstone.fitToWindow(viewerRef.current);
+      console.log("Rendering pipeline completed.");
 
     } catch (err) {
       console.error("Error loading image:", err);
