@@ -23,7 +23,7 @@ const Viewer: React.FC<ViewerProps> = ({
                 ref={viewerRef}
                 onMouseDown={onMouseDown}
                 onContextMenu={(e) => e.preventDefault()}
-                className="w-full h-full cursor-crosshair viewer-canvas animate-fade-in bg-[#0a0a0a] relative"
+                className="w-full h-full cursor-crosshair viewer-canvas animate-fade-in bg-[#0a0a0a] relative z-0 min-h-[400px]"
             />
 
             {!selectedFile && (

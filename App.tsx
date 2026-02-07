@@ -108,9 +108,22 @@ const App: React.FC = () => {
       console.log("Image loaded successfully:", image);
 
       window.cornerstone.displayImage(viewerRef.current, image);
-      console.log("Image displayed.");
+      console.log("Image displayed. Forcing viewport updates...");
 
-      // Extract Metadata
+      // Default viewport settings with safety checks
+      const viewport = window.cornerstone.getViewport(viewerRef.current);
+      if (viewport) {
+        viewport.voi.windowWidth = image.windowWidth || 400;
+        viewport.voi.windowCenter = image.windowCenter || 40;
+        window.cornerstone.setViewport(viewerRef.current, viewport);
+      }
+
+      // Reinforce visibility: Resize, Update, Fit
+      window.cornerstone.resize(viewerRef.current, true);
+      window.cornerstone.fitToWindow(viewerRef.current);
+      window.cornerstone.updateImage(viewerRef.current);
+
+      console.log("Rendering pipeline completed with fitToWindow.");
       const ds = image.data;
       const newMetadata = {
         name: ds.string('x00100010') || 'N/A',
@@ -196,6 +209,8 @@ const App: React.FC = () => {
   const resetViewport = () => {
     if (viewerRef.current) {
       window.cornerstone.reset(viewerRef.current);
+      window.cornerstone.fitToWindow(viewerRef.current);
+      window.cornerstone.updateImage(viewerRef.current);
     }
   };
 
