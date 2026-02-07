@@ -3,7 +3,7 @@ import { analyzeScan } from './gemini';
 
 // Mock GoogleGenAI at the top level
 vi.mock('@google/genai', () => {
-    const MockGoogleGenAI = vi.fn().mockImplementation(function (this: any) {
+    const MockGoogleGenAI = vi.fn().mockImplementation(function (this: { models: unknown }) {
         this.models = {
             generateContent: vi.fn().mockResolvedValue({
                 text: 'Mocked analysis result',

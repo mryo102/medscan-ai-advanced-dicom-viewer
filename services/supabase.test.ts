@@ -1,5 +1,4 @@
 import { vi, describe, it, expect, beforeEach } from 'vitest';
-import { createClient } from '@supabase/supabase-js';
 import { uploadScan, saveAnalysis } from './supabase';
 
 // Mock Supabase client
